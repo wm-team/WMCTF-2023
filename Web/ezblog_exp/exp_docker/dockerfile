@@ -1,0 +1,15 @@
+# docker build -t exp .
+# docker run --rm -it -p 3306:3306 exp
+# CHANGE MASTER TO MASTER_HOST='172.27.237.96', MASTER_USER='admin', MASTER_PASSWORD='123456', MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=211;
+# start slave;
+
+FROM dasctfbase/web_php73_apache_mysql
+
+RUN apt update && apt install -y python3 xxd
+
+COPY exp.sh /exp.sh
+COPY exp.py /exp.py
+
+ENTRYPOINT ["bash","/exp.sh"]
+
+EXPOSE 3306
