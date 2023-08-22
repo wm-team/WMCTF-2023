@@ -1,0 +1,81 @@
+{{ define "login.tmpl" }}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ .title }}</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            margin-top: 100px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333333;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>{{ .title }}</h2>
+    <form id="loginForm">
+        <div class="form-group">
+            <label for="email" class="form-label">邮箱：</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">密码:</label>
+            <input type="password" id="password" name="password" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">登录</button>
+    </form>
+    <a href="./forget">忘记密码?</a>
+    <a href="./register">用户注册</a>
+</div>
+</body>
+</html>
+ <!-- 引入Bootstrap和jQuery库 -->
+  <script src="/static/js/jquery-3.6.0.min.js"></script>
+  <script src="/static/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // 监听表单提交事件
+    $("#loginForm").submit(function(event) {
+      event.preventDefault(); // 阻止表单默认提交行为
+
+      // 获取输入的用户名和密码
+      var email = $("#email").val();
+      var password = $("#password").val();
+
+      // 发送POST请求到后端
+      $.ajax({
+        url: "/api/login", // 后端注册接口的URL
+        method: "POST",
+        data: {
+          email: email,
+          password: password,
+        },
+        success: function(response) {
+          // 注册成功，根据后端返回的结果进行处理
+          alert("登录成功！");
+           window.location.href = "./index";
+        },
+        error: function(xhr, status, error) {
+          // 注册失败，显示错误信息
+          alert("登录失败：" + error);
+        }
+      });
+    });
+  </script>
+{{ end }}

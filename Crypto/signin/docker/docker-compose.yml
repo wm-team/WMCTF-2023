@@ -1,0 +1,9 @@
+
+version: '2'
+
+services:
+  signin:
+    build: ./
+    ports:
+      - "10000:10000"
+  

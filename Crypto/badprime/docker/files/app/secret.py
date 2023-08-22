@@ -1,0 +1,1 @@
+flag = b'wmctf{b4d_primE_f4ctor_1s_the_w3akness_for_RSA}'

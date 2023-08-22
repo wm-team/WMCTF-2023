@@ -1,0 +1,9 @@
+---
+keystore:
+  File: /root/.sui/sui_config/sui.keystore
+envs:
+  - alias: custom
+    rpc: "http://sui:13338"
+    ws: ~
+active_env: custom
+active_address: "0xf791325f117d6a237b1b057692d6cfc3b6bb4db7aa4a69dd8a1f5aae5887b5cc"

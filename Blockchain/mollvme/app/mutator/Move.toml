@@ -1,0 +1,10 @@
+[package]
+name = "mollvme"
+version = "0.0.1"
+
+[dependencies]
+Sui = { git = "https://github.com/publicqi/sui.git", subdir = "crates/sui-framework/packages/sui-framework", rev = "framework/testnet" }
+
+[addresses]
+mollvme = "0x0"
+sui =  "0x2"

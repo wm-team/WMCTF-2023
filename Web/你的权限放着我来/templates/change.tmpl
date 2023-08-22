@@ -1,0 +1,71 @@
+{{ define "change.tmpl" }}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ .title }}</title>
+    <!-- 引入Bootstrap样式 -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="text-center mb-4">{{ .title }}</h1>
+
+                    <form   id="changeForm">
+                        <div class="mb-3">
+                            <label for="new-password" class="form-label">新密码：</label>
+                            <input type="password" class="form-control" id="new-password" name="new-password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirm-password" class="form-label">确认密码：</label>
+                            <input type="password" class="form-control" id="confirm-password" name="confirm-password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">重置密码</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+ <!-- 引入Bootstrap和jQuery库 -->
+  <script src="/static/js/jquery-3.6.0.min.js"></script>
+  <script src="/static/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // 监听表单提交事件
+    $("#changeForm").submit(function(event) {
+      event.preventDefault(); // 阻止表单默认提交行为
+
+      // 获取输入的用户名和密码
+      var newPassword = $("#new-password").val();
+      var confirmPassword = $("#confirm-password").val();
+
+      // 发送POST请求到后端
+      $.ajax({
+        url: "/api/change", // 后端注册接口的URL
+        method: "POST",
+        data: {
+          newPassword: newPassword,
+          confirmPassword: confirmPassword,
+          token: {{.token}},
+          email: {{.email}},
+        },
+        success: function(response) {
+          // 发送成功，根据后端返回的结果进行处理
+          alert("修改成功！");
+           window.location.reload();
+
+        },
+        error: function(xhr, status, error) {
+          // 找回失败，显示错误信息
+          alert("找回失败：" + error);
+        }
+      });
+    });
+  </script>
+{{ end }}

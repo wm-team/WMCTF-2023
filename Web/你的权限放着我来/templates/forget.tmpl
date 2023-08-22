@@ -1,0 +1,77 @@
+{{ define "forget.tmpl" }}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ .title }}</title>
+    <!-- 引入Bootstrap样式 -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: #ffffff;
+            margin-top: 100px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333333;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center">{{ .title }}</h1>
+
+    <form  id="forgetForm">
+        <div class="mb-3">
+            <label for="email" class="form-label">请输入注册时使用的邮箱：</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+        </div>
+        <button type="submit" class="btn btn-primary">发送重置链接</button>
+    </form>
+</div>
+</body>
+</html>
+ <!-- 引入Bootstrap和jQuery库 -->
+    <script src="/static/js/jquery-3.6.0.min.js"></script>
+    <script src="/static/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // 监听表单提交事件
+    $("#forgetForm").submit(function(event) {
+      event.preventDefault(); // 阻止表单默认提交行为
+
+      // 获取输入的用户名和密码
+      var email = $("#email").val();
+      var password = $("#password").val();
+
+      // 发送POST请求到后端
+      $.ajax({
+        url: "/api/forget", // 后端注册接口的URL
+        method: "POST",
+        data: {
+          email: email,
+        },
+        success: function(response) {
+          // 发送成功，根据后端返回的结果进行处理
+          alert("已发送至邮箱！");
+           window.location.reload();
+
+        },
+        error: function(xhr, status, error) {
+          // 找回失败，显示错误信息
+          alert("找回失败：" + error);
+        }
+      });
+    });
+  </script>
+{{ end }}

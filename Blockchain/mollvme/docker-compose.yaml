@@ -1,0 +1,14 @@
+version: '2.4'
+services:
+  server:
+    build: ./app/.
+    ports:
+      - 13337:5000
+    environment:
+      - FLAG=WMCTF{Sui_1s_4_4w3s0m3_4nd_3ff1c13nt_4rch1t3ctur3_FLAG_IS_GENERATED_BY_COPILOT}
+      - POW_DIFFICULTY=21337
+  sui:
+    build: ./sui
+    ports:
+      - 13338:13338 # RPC
+      - 13339:13339 # faucet

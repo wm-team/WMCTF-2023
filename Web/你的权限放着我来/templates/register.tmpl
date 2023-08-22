@@ -1,0 +1,83 @@
+{{ define "register.tmpl" }}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{.title}}</title>
+    <!-- 引入Bootstrap样式 -->
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="text-center mb-4">{{ .title }}</h1>
+
+                    <form  id="registerForm">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">用户名：</label>
+                            <input type="username" class="form-control" id="username" name="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">邮箱：</label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">密码：</label>
+                            <input type="password" class="form-control" id="password" name="password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirm-password" class="form-label">确认密码：</label>
+                            <input type="password" class="form-control" id="confirm-password" name="confirm-password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">注册</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <!-- 引入Bootstrap和jQuery库 -->
+  <script src="/static/js/jquery-3.6.0.min.js"></script>
+  <script src="/static/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // 监听表单提交事件
+    $("#registerForm").submit(function(event) {
+      event.preventDefault(); // 阻止表单默认提交行为
+
+      // 获取输入的用户名和密码
+      var username = $("#username").val();
+      var email = $("#email").val();
+      var password = $("#password").val();
+      var confirmPassword = $("#confirm-password").val();
+
+      // 发送POST请求到后端
+      $.ajax({
+        url: "/api/register", // 后端注册接口的URL
+        method: "POST",
+        data: {
+          username: username,
+          email: email,
+          password: password,
+          confirmPassword: confirmPassword
+        },
+        success: function(response) {
+          // 注册成功，根据后端返回的结果进行处理
+          alert("注册成功！");
+           window.location.href = "./login";
+        },
+        error: function(xhr, status, error) {
+          // 注册失败，显示错误信息
+          alert("注册失败：" + error);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+
+
+{{ end }}

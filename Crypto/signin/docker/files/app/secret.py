@@ -1,0 +1,1 @@
+flag = b'wmctf{we1c0me_brOo0Oo!hope_y0u_h4v3_fun_iN_the_fTcmWWmcTf/}'
